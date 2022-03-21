@@ -1,3 +1,5 @@
+/* https://coolors.co/386641-6a994e-a7c957-f2e8cf-bc4749 */
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 * {
@@ -6,4 +8,63 @@
 
 h1 {
     font-weight: bold;
+}
+
+.results {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.results .result_item {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    background-color: #bc4749;
+    color: #f2e8cf;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.currency_display {
+    font-size: 1.5em;
+}
+
+@media only screen and (max-width: 700px) {
+    .results {
+        flex-direction: column;
+    }
+
+    .results .result_item {
+        flex-direction: row;
+        justify-content: unset;
+        margin-top: 0.5rem;
+    }
+
+    .currency_display {
+        margin-left: .2em;
+        font-size: unset;
+    }
+}
+
+.tip_form {
+    border-radius: 5px;
+    background-color: #a7c957;
+    padding: 1rem;
+    color: #111;
+}
+
+.confirm_button {
+    border: none;
+    border-radius: 15px;
+    padding: 0.4rem 1rem;
+    background-color: #386641;
+    color: #f2e8cf;
 }

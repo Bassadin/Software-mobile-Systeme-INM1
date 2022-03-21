@@ -10,7 +10,7 @@
     <body>
         <h1>Yam Yam Home</h1>
 
-        <form>
+        <form class="tip_form">
             <label for="gross_amount">Rechnungsbetrag:</label>
             <input
                 type="number"
@@ -32,14 +32,22 @@
                 name="amount_of_persons"
                 placeholder="Anzahl Personen"
             /><br /><br />
-            <button>Zeige Trinkgeld</button>
+            <button class="confirm_button">Zeige Trinkgeld</button>
         </form>
 
         <div class="results">
-            <p>Gesamtbetrag:</p>
-            <p>Betrag je Person:</p>
-            <p>Trinkgeld:</p>
-            <p>Trinkgeld je Person:</p>
+            <span class="result_item">
+                Gesamtbetrag: <span class="currency_display">X€ </span>
+            </span>
+            <span class="result_item">
+                Betrag je Person: <span class="currency_display">X€</span>
+            </span>
+            <span class="result_item">
+                Trinkgeld: <span class="currency_display">X€</span>
+            </span>
+            <span class="result_item">
+                Trinkgeld je Person: <span class="currency_display">X€</span>
+            </span>
         </div>
     </body>
 </html>
