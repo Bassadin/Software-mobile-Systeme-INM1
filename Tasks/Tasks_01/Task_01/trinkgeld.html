@@ -8,30 +8,41 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h1>Yam Yam Home</h1>
+        <h1>Trinkgeldrechner</h1>
 
         <form class="tip_form">
             <label for="gross_amount">Rechnungsbetrag:</label>
             <input
                 type="number"
+                min="0.00"
+                max="10000.00"
+                step="0.01"
                 id="gross_amount"
                 name="gross_amount"
                 placeholder="Rechnungsbeitrag"
-            /><br /><br />
+                required
+            />
             <label for="tip_percentage">Trinkgeld (%):</label>
             <input
                 type="number"
+                min="0.00"
+                max="100.00"
+                step="0.01"
                 id="tip_percentage"
                 name="tip_percentage"
                 placeholder="Trinkgeld (%)"
-            /><br /><br />
+                required
+            />
             <label for="amount_of_persons">Anzahl Personen:</label>
             <input
                 type="number"
+                min="1"
+                step="1"
                 id="amount_of_persons"
                 name="amount_of_persons"
                 placeholder="Anzahl Personen"
-            /><br /><br />
+                required
+            />
             <button class="confirm_button">Zeige Trinkgeld</button>
         </form>
 
