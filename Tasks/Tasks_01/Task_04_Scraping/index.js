@@ -24,6 +24,7 @@ axios.get("https://www.spiegel.de/schlagzeilen/").then((response) => {
             ".items-end.leading-loose :first-child"
         ).innerHTML;
 
+        // Get article link
         let articleLink = eachHeadlineElement
             .querySelector("article a[href]")
             .getAttribute("href");
