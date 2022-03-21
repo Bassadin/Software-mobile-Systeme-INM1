@@ -2,6 +2,7 @@ import axios from "axios";
 import { JSDOM } from "jsdom";
 
 axios.get("https://www.spiegel.de/schlagzeilen/").then((response) => {
+    // Convert the response into a JSDom object
     const dom = new JSDOM(response.data);
 
     // Convert from NodeList to Array using deconstructuring operator
@@ -11,6 +12,7 @@ axios.get("https://www.spiegel.de/schlagzeilen/").then((response) => {
         ),
     ];
 
+    // Get only the first ten headline elements to prevent a wall of text in the console :D
     let firstTenHeadlines = allHeadlines.slice(0, 10);
 
     firstTenHeadlines.forEach((eachHeadlineElement) => {
@@ -29,6 +31,7 @@ axios.get("https://www.spiegel.de/schlagzeilen/").then((response) => {
             .querySelector("article a[href]")
             .getAttribute("href");
 
+        // Actually print out the data in a readable format using JS template strings
         console.log(`* ${timeAndOrDate} - ${articleTitle} (${articleLink})`);
     });
 });
