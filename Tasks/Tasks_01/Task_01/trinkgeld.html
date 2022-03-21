@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Trinkgeldrechner</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Yam Yam Home</h1>
+
+        <form>
+            <label for="gross_amount">Rechnungsbetrag:</label>
+            <input
+                type="number"
+                id="gross_amount"
+                name="gross_amount"
+                placeholder="Rechnungsbeitrag"
+            /><br /><br />
+            <label for="tip_percentage">Trinkgeld (%):</label>
+            <input
+                type="number"
+                id="tip_percentage"
+                name="tip_percentage"
+                placeholder="Trinkgeld (%)"
+            /><br /><br />
+            <label for="amount_of_persons">Anzahl Personen:</label>
+            <input
+                type="number"
+                id="amount_of_persons"
+                name="amount_of_persons"
+                placeholder="Anzahl Personen"
+            /><br /><br />
+            <button>Zeige Trinkgeld</button>
+        </form>
+
+        <div class="results">
+            <p>Gesamtbetrag:</p>
+            <p>Betrag je Person:</p>
+            <p>Trinkgeld:</p>
+            <p>Trinkgeld je Person:</p>
+        </div>
+    </body>
+</html>
