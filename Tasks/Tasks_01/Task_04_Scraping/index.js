@@ -21,6 +21,10 @@ axios.get("https://www.spiegel.de/schlagzeilen/").then((response) => {
             ".items-end.leading-loose :first-child"
         ).innerHTML;
 
-        console.log(`${timeAndOrDate} - ${articleTitle}`);
+        let articleLink = eachHeadlineElement
+            .querySelector("article a[href]")
+            .getAttribute("href");
+
+        console.log(`* ${timeAndOrDate} - ${articleTitle} (${articleLink})`);
     });
 });
