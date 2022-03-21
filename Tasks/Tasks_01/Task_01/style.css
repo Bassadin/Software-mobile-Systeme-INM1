@@ -10,6 +10,28 @@ h1 {
     font-weight: bold;
 }
 
+nav.nav-menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+nav.nav-menu ul li {
+    margin-top: 0.6rem;
+}
+
+nav.nav-menu ul li a {
+    color: #386641;
+    transition: color 0.1s ease-in;
+}
+
+nav.nav-menu ul li a:hover {
+    color: #6a994e;
+}
+
+nav.nav-menu ul li:not(:first-child) {
+    margin-top: 0.6rem;
+}
+
 .results {
     display: flex;
     flex-direction: row;
@@ -49,7 +71,7 @@ h1 {
     }
 
     .currency_display {
-        margin-left: .2em;
+        margin-left: 0.2em;
         font-size: unset;
     }
 }
@@ -67,4 +89,10 @@ h1 {
     padding: 0.4rem 1rem;
     background-color: #386641;
     color: #f2e8cf;
+    transition: background-color 0.1s ease-in;
+}
+
+.confirm_button:hover {
+    background-color: #6a994e;
+    cursor: pointer;
 }
