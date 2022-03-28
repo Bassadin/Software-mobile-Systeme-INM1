@@ -10,20 +10,18 @@ export default class TipModel {
     }
 
     public getGrossAmount(): number {
-        return this.grossAmount;
+        return this.grossAmount + this.getEntireTipSum();
     }
 
     public getGrossAmountPerPerson(): number {
-        return this.grossAmount / this.partySize;
+        return this.grossAmount / this.partySize + this.getTipPerPerson();
     }
 
     public getTipPerPerson(): number {
-        // TODO
-        return 0;
+        return this.getEntireTipSum() / this.partySize;
     }
 
     public getEntireTipSum(): number {
-        // TODO
-        return 0;
+        return this.grossAmount * (this.tipPercentage / 100);
     }
 }
