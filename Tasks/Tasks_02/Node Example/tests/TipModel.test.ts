@@ -2,7 +2,7 @@ import TipModel from "../src/TipModel";
 import { expect } from "chai";
 
 describe("Tip Model tests", () => {
-    it("tests valid tip model calculations", () => {
+    it("valid tip model calculations", () => {
         const tipModel = new TipModel(2, 5, 200);
 
         expect(tipModel.getEntireTipSum()).to.equal(10);
@@ -10,10 +10,16 @@ describe("Tip Model tests", () => {
         expect(tipModel.getGrossAmountPerPerson()).to.equal(105);
         expect(tipModel.getTipPerPerson()).to.equal(5);
     });
-    it("tests negative party size", () => {
+    it("negative party size", () => {
         expect(() => new TipModel(-2, 5, 200)).to.throw(Error);
     });
-    it("tests zero party size", () => {
+    it("zero party size", () => {
         expect(() => new TipModel(0, 5, 200)).to.throw();
+    });
+    it("negative tip percentage", () => {
+        expect(() => new TipModel(2, -10, 200)).to.throw();
+    });
+    it("negative gross amount", () => {
+        expect(() => new TipModel(2, 10, -200)).to.throw();
     });
 });
