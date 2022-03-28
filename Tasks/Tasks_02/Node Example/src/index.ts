@@ -1,1 +1,7 @@
-console.log("Hello from node-ts");
+import TipModel from "./TipModel";
+const tipModel = new TipModel(2, 5, 200);
+
+console.log(tipModel.getEntireTipSum());
+console.log(tipModel.getGrossAmount());
+console.log(tipModel.getGrossAmountPerPerson());
+console.log(tipModel.getTipPerPerson());
