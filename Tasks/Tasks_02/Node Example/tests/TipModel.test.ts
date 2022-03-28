@@ -1,5 +1,6 @@
 import TipModel from "../src/TipModel";
 import { expect } from "chai";
+import "mocha";
 
 describe("Tip Model tests", () => {
     it("valid tip model calculations", () => {
