@@ -1,0 +1,14 @@
+{
+    "name": "node-tip-example",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.ts",
+    "scripts": {
+        "start": "ts-node src/index.ts"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "ts-node": "^10.7.0"
+    }
+}
