@@ -1,6 +1,6 @@
 import Observer from "./Observer";
 
-export default abstract class Subject {
+export default abstract class Observable {
     private observers: Observer[] = [];
 
     addObserver(observer: Observer) {
@@ -11,7 +11,7 @@ export default abstract class Subject {
         this.observers.push(observer);
     }
 
-    notifyObservers(data: any) {
+    notifyObservers(data: String) {
         this.observers.forEach((eachObserver) => eachObserver.update(data));
     }
 }

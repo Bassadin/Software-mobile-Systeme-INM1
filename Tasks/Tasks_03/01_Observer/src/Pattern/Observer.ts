@@ -1,3 +1,3 @@
 export default abstract class Observer {
-    abstract update(data: any): void;
+    abstract update(data: String): void;
 }
