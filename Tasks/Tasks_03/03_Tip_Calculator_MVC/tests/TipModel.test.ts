@@ -1,4 +1,4 @@
-import TipModel from "../src/TipModel";
+import TipModel from "../src/scripts/TipModel";
 import { expect } from "chai";
 import "mocha";
 
