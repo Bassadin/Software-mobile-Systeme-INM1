@@ -16,7 +16,7 @@ export class TrafficLight {
                 TrafficLightState.GREEN;
                 break;
             case TrafficLightState.GREEN:
-                TrafficLightState.GREEN;
+                TrafficLightState.RED;
                 break;
         }
     }
