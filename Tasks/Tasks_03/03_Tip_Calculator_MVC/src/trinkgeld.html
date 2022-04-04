@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Trinkgeldrechner</title>
+        <link rel="stylesheet" href="styles/style.css" />
+        <script type="module" src="scripts/app.ts"></script>
+    </head>
+    <body>
+        <h1>Trinkgeldrechner</h1>
+
+        <form class="tip_form">
+            <label for="gross_amount">Rechnungsbetrag:</label>
+            <input
+                type="number"
+                min="0.00"
+                max="10000.00"
+                step="0.01"
+                id="gross_amount"
+                name="gross_amount"
+                placeholder="Rechnungsbeitrag"
+                required
+            />
+            <label for="tip_percentage">Trinkgeld (%):</label>
+            <input
+                type="number"
+                min="0.00"
+                max="100.00"
+                step="0.01"
+                id="tip_percentage"
+                name="tip_percentage"
+                placeholder="Trinkgeld (%)"
+                required
+            />
+            <label for="amount_of_persons">Anzahl Personen:</label>
+            <input
+                type="number"
+                min="1"
+                step="1"
+                id="amount_of_persons"
+                name="amount_of_persons"
+                placeholder="Anzahl Personen"
+                required
+            />
+            <button class="confirm_button">Zeige Trinkgeld</button>
+        </form>
+
+        <div class="results">
+            <span class="result_item">
+                Gesamtbetrag: <span class="currency_display">X€ </span>
+            </span>
+            <span class="result_item">
+                Betrag je Person: <span class="currency_display">X€</span>
+            </span>
+            <span class="result_item">
+                Trinkgeld: <span class="currency_display">X€</span>
+            </span>
+            <span class="result_item">
+                Trinkgeld je Person: <span class="currency_display">X€</span>
+            </span>
+        </div>
+    </body>
+</html>
