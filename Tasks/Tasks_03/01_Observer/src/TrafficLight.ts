@@ -16,17 +16,20 @@ export class TrafficLight extends Observable {
     public switchLateState(): void {
         switch (this.lightState) {
             case TrafficLightState.RED:
-                TrafficLightState.GREEN;
+                this.lightState = TrafficLightState.GREEN;
+                console.log(
+                    `The traffic light has switched to ${this.getLightState()}.`
+                );
                 this.notifyObserversAboutLightState();
                 break;
             case TrafficLightState.GREEN:
-                TrafficLightState.RED;
+                this.lightState = TrafficLightState.RED;
+                console.log(
+                    `The traffic light has switched to ${this.getLightState()}.`
+                );
                 this.notifyObserversAboutLightState();
                 break;
         }
-        console.log(
-            `The traffic light has switched to ${this.getLightState()}.`
-        );
     }
 
     public notifyObserversAboutLightState(): void {

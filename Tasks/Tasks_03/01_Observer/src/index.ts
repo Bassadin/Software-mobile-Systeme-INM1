@@ -10,3 +10,4 @@ let pedestrian2: Pedestrian = new Pedestrian("Hilde");
 trafficLight.addObserver(pedestrian2);
 
 trafficLight.switchLateState();
+trafficLight.switchLateState();
