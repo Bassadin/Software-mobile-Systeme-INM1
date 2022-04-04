@@ -11,7 +11,7 @@
     <body>
         <h1>Trinkgeldrechner</h1>
 
-        <form class="tip_form">
+        <form class="tip_form" id="tip-calculation-form">
             <label for="gross_amount">Rechnungsbetrag:</label>
             <input
                 type="number"
@@ -20,6 +20,7 @@
                 step="0.01"
                 id="gross_amount"
                 name="gross_amount"
+                value="100"
                 placeholder="Rechnungsbeitrag"
                 required
             />
@@ -31,6 +32,7 @@
                 step="0.01"
                 id="tip_percentage"
                 name="tip_percentage"
+                value="10"
                 placeholder="Trinkgeld (%)"
                 required
             />
@@ -41,24 +43,42 @@
                 step="1"
                 id="amount_of_persons"
                 name="amount_of_persons"
+                value="4"
                 placeholder="Anzahl Personen"
                 required
             />
-            <button class="confirm_button">Zeige Trinkgeld</button>
+            <button class="confirm_button" id="calculate-tip-button">
+                Zeige Trinkgeld
+            </button>
         </form>
 
         <div class="results">
             <span class="result_item">
-                Gesamtbetrag: <span class="currency_display">X€ </span>
+                Gesamtbetrag:
+                <span class="currency_display" id="gross-amount-result">
+                    X€
+                </span>
             </span>
             <span class="result_item">
-                Betrag je Person: <span class="currency_display">X€</span>
+                Betrag je Person:
+                <span
+                    class="currency_display"
+                    id="gross-amount-per-person-result"
+                >
+                    X€
+                </span>
             </span>
             <span class="result_item">
-                Trinkgeld: <span class="currency_display">X€</span>
+                Trinkgeld:
+                <span class="currency_display" id="entire-tip-sum-result">
+                    X€
+                </span>
             </span>
             <span class="result_item">
-                Trinkgeld je Person: <span class="currency_display">X€</span>
+                Trinkgeld je Person:
+                <span class="currency_display" id="tip-per-person-result">
+                    X€
+                </span>
             </span>
         </div>
     </body>
