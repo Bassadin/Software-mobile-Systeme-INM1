@@ -1,17 +1,17 @@
 import Observer from "./Observer";
 
-export default abstract class Observable {
-    private observers: Observer[] = [];
+export default abstract class Observable<T> {
+    private observers: Observer<T>[] = [];
 
-    addObserver(observer: Observer) {
+    addObserver(observer: Observer<T>) {
         this.observers.push(observer);
     }
 
-    removeObserver(observer: Observer) {
+    removeObserver(observer: Observer<T>) {
         this.observers.push(observer);
     }
 
-    notifyObservers(data: String) {
+    notifyObservers(data: T) {
         this.observers.forEach((eachObserver) => eachObserver.update(data));
     }
 }
