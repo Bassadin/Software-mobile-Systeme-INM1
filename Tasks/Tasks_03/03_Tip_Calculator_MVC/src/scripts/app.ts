@@ -2,7 +2,7 @@
 import "~src/styles/style.scss";
 
 // Requires
-import { TipModel } from "./TipModel";
+import TipModel from "./TipModel";
 import { TipModelController } from "./TipModelController";
 
 let tipModel = new TipModel(100, 10, 4);

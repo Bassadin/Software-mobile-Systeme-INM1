@@ -1,13 +1,7 @@
 import Observable from "./Patterns/Observable";
 import { TipModelControllerInterface } from "./TipModelController";
 
-export interface TipModelInterface {
-    partySize: number;
-    tipPercentage: number;
-    grossAmount: number;
-}
-
-export class TipModel extends Observable<TipModelControllerInterface> {
+export default class TipModel extends Observable<TipModelControllerInterface> {
     private partySize: number = 4;
     private tipPercentage: number = 10.0;
     private grossAmount: number = 100.0;

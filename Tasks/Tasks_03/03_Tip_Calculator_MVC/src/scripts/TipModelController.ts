@@ -1,5 +1,5 @@
 import Observer from "./Patterns/Observer";
-import { TipModel } from "./TipModel";
+import TipModel from "./TipModel";
 
 export interface TipModelControllerInterface {
     grossAmountResult: number;
@@ -33,19 +33,25 @@ export class TipModelController
     private amountOfPersonsInputField = <HTMLInputElement>(
         document.getElementById("amount_of_persons")!
     );
-    
+
     public setEvent(modelRef: TipModel) {
         document
             .getElementById("tip-calculation-form")!
             .addEventListener("submit", (event) => {
                 event.preventDefault();
-        
-                modelRef.setGrossAmount(parseFloat(this.grossAmountInputField.value));
-                modelRef.setTipPercentage(parseFloat(this.tipPercentageInputField.value));
-                modelRef.setPartySize(parseInt(this.amountOfPersonsInputField.value), true);
-            });
 
-    }    
+                modelRef.setGrossAmount(
+                    parseFloat(this.grossAmountInputField.value)
+                );
+                modelRef.setTipPercentage(
+                    parseFloat(this.tipPercentageInputField.value)
+                );
+                modelRef.setPartySize(
+                    parseInt(this.amountOfPersonsInputField.value),
+                    true
+                );
+            });
+    }
 
     update(data: TipModelControllerInterface): void {
         this.grossAmountResultItem.innerText =
