@@ -7,7 +7,8 @@
     "scripts": {
         "start": "parcel",
         "build": "parcel build",
-        "test": "mocha -r ts-node/register 'tests/**/*.ts'"
+        "test": "mocha -r ts-node/register 'tests/**/*.ts'",
+        "format": "prettier --write ."
     },
     "author": "",
     "license": "ISC",
@@ -18,6 +19,7 @@
         "chai": "^4.3.6",
         "mocha": "^9.2.2",
         "parcel": "^2.4.1",
+        "prettier": "^2.6.2",
         "ts-node": "^10.7.0",
         "yarn": "^1.22.18"
     }
