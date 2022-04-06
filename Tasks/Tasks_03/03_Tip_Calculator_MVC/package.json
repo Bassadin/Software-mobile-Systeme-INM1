@@ -12,6 +12,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@parcel/transformer-sass": "^2.4.1",
         "@types/chai": "^4.3.0",
         "@types/mocha": "^9.1.0",
         "chai": "^4.3.6",

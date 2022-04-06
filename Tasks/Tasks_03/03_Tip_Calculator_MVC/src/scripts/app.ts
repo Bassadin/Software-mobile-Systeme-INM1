@@ -1,3 +1,7 @@
+//Styles
+import "~src/styles/style.scss";
+
+// Requires
 import TipModel from "./TipModel";
 
 let calculateTipForm = document.getElementById("tip-calculation-form")!;
