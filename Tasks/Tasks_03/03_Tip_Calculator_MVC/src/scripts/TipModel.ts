@@ -36,6 +36,6 @@ export default class TipModel {
     }
 
     public getEntireTipSum(): number {
-        return this.grossAmount * (this.tipPercentage / 100);
+        return this.grossAmount * (this.tipPercentage / 100.0);
     }
 }

@@ -24,7 +24,7 @@ calculateTipForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const tipModel = new TipModel(
         parseInt(amountOfPersonsInputField.value),
-        parseInt(tipPercentageInputField.value),
+        parseFloat(tipPercentageInputField.value),
         parseFloat(grossAmountInputField.value)
     );
 
