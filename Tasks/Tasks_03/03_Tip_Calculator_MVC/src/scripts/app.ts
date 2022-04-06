@@ -2,42 +2,30 @@
 import "~src/styles/style.scss";
 
 // Requires
-import TipModel from "./TipModel";
+import { TipModel } from "./TipModel";
+import { TipModelController } from "./TipModelController";
 
-let calculateTipForm = document.getElementById("tip-calculation-form")!;
+let tipModel = new TipModel(100, 10, 4);
+let tipModelController: TipModelController = new TipModelController();
+tipModel.addObserver(tipModelController);
+tipModel.notifyObserversWithControllerUpdateData();
 
-let grossAmountInputField = <HTMLInputElement>(
+const grossAmountInputField = <HTMLInputElement>(
     document.getElementById("gross_amount")!
 );
-let tipPercentageInputField = <HTMLInputElement>(
+const tipPercentageInputField = <HTMLInputElement>(
     document.getElementById("tip_percentage")!
 );
-let amountOfPersonsInputField = <HTMLInputElement>(
+const amountOfPersonsInputField = <HTMLInputElement>(
     document.getElementById("amount_of_persons")!
 );
 
-let grossAmountResultItem = document.getElementById("gross-amount-result")!;
-let tipPerPersonResultItem = document.getElementById("tip-per-person-result")!;
-let entireTipSumResultItem = document.getElementById("entire-tip-sum-result")!;
-let grossAmountPerPersonResultItem = document.getElementById(
-    "gross-amount-per-person-result"
-)!;
+document
+    .getElementById("tip-calculation-form")!
+    .addEventListener("submit", (event) => {
+        event.preventDefault();
 
-calculateTipForm.addEventListener("submit", (event) => {
-    // Keep browser from reloading after event submission
-    event.preventDefault();
-    const tipModel = new TipModel(
-        parseInt(amountOfPersonsInputField.value),
-        parseFloat(tipPercentageInputField.value),
-        parseFloat(grossAmountInputField.value)
-    );
-
-    grossAmountResultItem.innerText =
-        tipModel.getGrossAmount().toFixed(2) + "€";
-    entireTipSumResultItem.innerText =
-        tipModel.getEntireTipSum().toFixed(2) + "€";
-    grossAmountPerPersonResultItem.innerText =
-        tipModel.getGrossAmountPerPerson().toFixed(2) + "€";
-    tipPerPersonResultItem.innerText =
-        tipModel.getTipPerPerson().toFixed(2) + "€";
-});
+        tipModel.setGrossAmount(parseFloat(grossAmountInputField.value));
+        tipModel.setTipPercentage(parseFloat(tipPercentageInputField.value));
+        tipModel.setPartySize(parseInt(amountOfPersonsInputField.value), true);
+    });
