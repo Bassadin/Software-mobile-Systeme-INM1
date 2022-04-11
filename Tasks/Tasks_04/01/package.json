@@ -1,0 +1,24 @@
+{
+    "name": "task_04-currency-converter-ajax",
+    "version": "1.0.0",
+    "description": "",
+    "browserslist": "> 0.5%, last 2 versions, not dead",
+    "source": "src/index.html",
+    "scripts": {
+        "start": "parcel",
+        "build": "parcel build",
+        "format": "prettier --write ."
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@parcel/transformer-sass": "^2.4.1",
+        "parcel": "^2.4.1",
+        "prettier": "^2.6.2",
+        "ts-node": "^10.7.0",
+        "yarn": "^1.22.18"
+    },
+    "dependencies": {
+        "axios": "^0.26.1"
+    }
+}

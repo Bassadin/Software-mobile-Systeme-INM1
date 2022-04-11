@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Währungsrechner</title>
+
+		<script defer src="js/util.js"></script>
+		<script defer src="js/model.js"></script>
+		<script defer src="js/controller.js"></script>
+		<script defer src="js/app.js"></script>
+
+		<script type="module" src="scripts/app.ts"></script>
+
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>Währungsrechner</h1>
+			</header>
+
+			<form >
+				<table>
+					<tr>
+						<td>Schweizer Franken:</td>
+						<td>
+						<input type="text" size="30" id="chfIN" >
+						</td>
+					</tr>
+					<tr>
+						<td>Euro: </td>
+						<td>
+						<input type="text" size="30" id="euroIN" readonly >
+						</td>
+					</tr>
+				</table>
+				<br>
+				<input id="convertBN" type="button" value="Convert">
+			</form>
+		</div>
+	</body>
+</html>
