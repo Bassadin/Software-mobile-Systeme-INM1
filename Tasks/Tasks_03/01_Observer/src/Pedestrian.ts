@@ -1,6 +1,6 @@
 import Observer from "./Pattern/Observer";
 
-export default class Pedestrian implements Observer {
+export default class Pedestrian implements Observer<String> {
     private name: String;
 
     constructor(name: String) {

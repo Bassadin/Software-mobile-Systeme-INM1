@@ -1,12 +1,11 @@
 import Observable from "./Pattern/Observable";
-import Observer from "./Pattern/Observer";
 
 export enum TrafficLightState {
     GREEN = "green",
     RED = "red",
 }
 
-export class TrafficLight extends Observable {
+export class TrafficLight extends Observable<String> {
     private lightState: TrafficLightState = TrafficLightState.RED;
 
     public getLightState(): String {
