@@ -7,7 +7,7 @@ export default class Pedestrian implements Observer<String> {
         this.name = name;
     }
 
-    update(data: String): void {
+    public update(data: String): void {
         console.log(`${this.name}: Oh! The traffic light is now ${data}!`);
     }
 }

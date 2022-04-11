@@ -31,7 +31,7 @@ export class TrafficLight extends Observable<String> {
         }
     }
 
-    public notifyObserversAboutLightState(): void {
+    private notifyObserversAboutLightState(): void {
         this.notifyObservers(this.getLightState());
     }
 }
