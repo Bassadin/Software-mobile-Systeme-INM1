@@ -4,8 +4,6 @@
         <meta charset="utf-8" />
 
         <title>Währungsrechner</title>
-
-        <script type="module" src="scripts/app.ts"></script>
     </head>
 
     <body>
@@ -19,13 +17,23 @@
                     <tr>
                         <td>Schweizer Franken:</td>
                         <td>
-                            <input type="number" min="0" step="0.01" id="chfIN" />
+                            <input
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                id="chfIN"
+                            />
                         </td>
                     </tr>
                     <tr>
                         <td>Euro:</td>
                         <td>
-                            <input type="number" size="30" id="euroIN" readonly />
+                            <input
+                                type="number"
+                                size="30"
+                                id="euroIN"
+                                readonly
+                            />
                         </td>
                     </tr>
                 </table>
@@ -33,5 +41,7 @@
                 <input id="convertBN" type="button" value="Convert" />
             </form>
         </div>
+
+        <script type="module" src="/src/scripts/app.ts"></script>
     </body>
 </html>

@@ -4,7 +4,7 @@ export default class Model extends Observable<number> {
     private chf: number = 0;
 
     public async getChfRate() {
-        let request = await fetch("static/rate.json");
+        let request = await fetch("rate.json");
         let jsonData = await request.json();
         let exchangeRate = jsonData.chfRate;
 
