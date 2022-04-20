@@ -3,8 +3,9 @@ import Model from "./model";
 
 var model = new Model();
 var controller = new Controller(model);
-window.addEventListener("DOMContentLoaded", controller.onLoaded, false);
 
-function stringToKeyCode(letter: string) {
-    return letter.charCodeAt(0);
-}
+model.addObserver(controller);
+
+document.getElementById("convertBN")!.addEventListener("click", (e) => {
+    controller.processCHF();
+});

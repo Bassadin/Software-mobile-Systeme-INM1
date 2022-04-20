@@ -1,7 +1,7 @@
 "use strict";
 
 import Model from "./model";
-import Observable from "./Patterns/Observable";
+import Observable from "./Patterns/Observable"
 import Observer from "./Patterns/Observer";
 
 export default class Controller implements Observer<number> {
@@ -11,14 +11,14 @@ export default class Controller implements Observer<number> {
         this.model = model;
     }
 
-    public getCHF(): string {
-        return (<HTMLInputElement>window.document.getElementById("chfIN")!)
+    private getCHFElement(): string {
+        return (<HTMLInputElement>document.getElementById("chfIN")!)
             .value;
     }
 
     public processCHF() {
-        var chfText = this.getCHF(),
-            chf = parseInt(chfText, 10);
+        let chfText: string = this.getCHFElement();
+        let chf: number = parseInt(chfText, 10);
         if (isNaN(chf)) {
             this.update(0);
         } else {
@@ -26,14 +26,8 @@ export default class Controller implements Observer<number> {
         }
     }
 
-    public onLoaded() {
-        window.document
-            .getElementById("convertBN")!
-            .addEventListener("click", this.processCHF, false);
-    }
-
     public update(euro: number) {
-        (<HTMLInputElement>window.document.getElementById("euroIN")!).value =
+        (<HTMLInputElement>document.getElementById("euroIN")!).value =
             euro.toString();
     }
 }
