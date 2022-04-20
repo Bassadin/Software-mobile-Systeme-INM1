@@ -11,8 +11,7 @@ export default class Controller implements Observer<number> {
     }
 
     private getCHFElement(): string {
-        return (<HTMLInputElement>document.getElementById("chfIN")!)
-            .value;
+        return (<HTMLInputElement>document.getElementById("chfIN")!).value;
     }
 
     public processCHF() {
