@@ -5,27 +5,27 @@ import Observer from "./Patterns/Observer";
 
 export default class Controller implements Observer<number> {
     private model: Model;
+    private chfElement: HTMLInputElement = <HTMLInputElement>(
+        document.getElementById("chfIN")!
+    );
+    private eurElement: HTMLInputElement = <HTMLInputElement>(
+        document.getElementById("euroIN")!
+    );
 
     constructor(model: Model) {
         this.model = model;
     }
 
-    private getCHFElement(): string {
-        return (<HTMLInputElement>document.getElementById("chfIN")!).value;
-    }
-
     public processCHF() {
-        let chfText: string = this.getCHFElement();
-        let chf: number = parseInt(chfText, 10);
-        if (isNaN(chf)) {
+        let chfValue: number = parseInt(this.chfElement.value, 10);
+        if (isNaN(chfValue)) {
             this.update(0);
         } else {
-            this.model.setCHF(chf);
+            this.model.updateEurPriceWithChfAmount(chfValue);
         }
     }
 
     public update(euro: number) {
-        (<HTMLInputElement>document.getElementById("euroIN")!).value =
-            euro.toString();
+        this.eurElement.value = euro.toString();
     }
 }
