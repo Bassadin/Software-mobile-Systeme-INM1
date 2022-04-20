@@ -1,13 +1,21 @@
 import Observable from "./Patterns/Observable";
-import Observer from "./Patterns/Observer";
 
 export default class Model extends Observable<number> {
-    private rate: number = 0.95;
     private chf: number = 0;
 
+    public async getChfRate() {
+        let request = await fetch("static/rate.json");
+        let jsonData = await request.json();
+        let exchangeRate = jsonData.chfRate;
+
+        return exchangeRate;
+    }
+
     public getEUR() {
-        let euro = this.chf * this.rate;
-        this.notifyObservers(euro);
+        this.getChfRate().then((exchangeRate: number) => {
+            let euro = this.chf * exchangeRate;
+            this.notifyObservers(euro);
+        });
     }
 
     public setCHF(amount: number): void {

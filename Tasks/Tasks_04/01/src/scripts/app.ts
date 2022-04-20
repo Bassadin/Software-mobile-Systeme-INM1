@@ -1,5 +1,5 @@
-import Controller from "./controller";
-import Model from "./model";
+import Controller from "./Controller";
+import Model from "./Model";
 
 var model = new Model();
 var controller = new Controller(model);

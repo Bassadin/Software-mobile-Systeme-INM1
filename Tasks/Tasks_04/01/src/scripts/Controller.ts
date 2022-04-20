@@ -1,7 +1,6 @@
 "use strict";
 
-import Model from "./model";
-import Observable from "./Patterns/Observable"
+import Model from "./Model";
 import Observer from "./Patterns/Observer";
 
 export default class Controller implements Observer<number> {
