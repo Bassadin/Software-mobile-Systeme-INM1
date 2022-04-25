@@ -13,14 +13,9 @@
             </header>
 
             <form id="conversionForm">
-                <label for="sourceCurrency">Choose a source currency:</label>
-
-                <select name="sourceCurrency" id="sourceCurrency">
-                    <!-- Insert by js -->
-                </select>
-
                 <br />
 
+                <label for="currencyInput">Choose a source euro amount:</label>
                 <input
                     type="number"
                     name="currencyInput"
@@ -39,7 +34,6 @@
 
                 <br />
 
-                <span id="euroIN">0</span>
                 <span id="outputCurrency"></span>
                 <br />
                 <button id="convertButton" type="submit">Convert</button>
