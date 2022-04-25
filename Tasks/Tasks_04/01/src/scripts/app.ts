@@ -6,6 +6,7 @@ var controller = new Controller(model);
 
 model.addObserver(controller);
 
-document.getElementById("convertBN")!.addEventListener("click", (e) => {
+document.getElementById("conversionForm")!.addEventListener("submit", (event) => {
+    event.preventDefault();
     controller.processCHF();
 });

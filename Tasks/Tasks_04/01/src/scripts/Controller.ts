@@ -26,6 +26,6 @@ export default class Controller implements Observer<number> {
     }
 
     public update(euro: number) {
-        this.eurElement.value = euro.toString();
+        this.eurElement.innerText = euro.toString();
     }
 }
