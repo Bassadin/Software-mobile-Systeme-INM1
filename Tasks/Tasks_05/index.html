@@ -1,43 +1,85 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="h-screen w-screen">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>Währungsrechner</title>
+        <script defer type="module" src="/src/scripts/app.ts"></script>
     </head>
 
-    <body>
-        <div>
-                <h1>Währungsrechner</h1>
+    <body class="h-screen w-screen flex flex-col justify-center">
+        <h1 class="text-3xl font-bold underline mx-auto text-center">
+            Currency Converter
+        </h1>
 
-            <form id="conversionForm">
-                <br />
+        <form
+            class="w-full max-w-sm pt-10 align-middle mx-auto"
+            id="conversionForm"
+        >
+            <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label
+                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                        for="currencyInput"
+                    >
+                        € Amount
+                    </label>
+                </div>
+                <div class="md:w-2/3">
+                    <input
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        type="number"
+                        name="currencyInput"
+                        min="0"
+                        step="0.01"
+                        id="currencyInput"
+                        value="10"
+                    />
+                </div>
+            </div>
+            <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/3">
+                    <label
+                        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                        for="targetCurrency"
+                    >
+                        Target currency
+                    </label>
+                </div>
+                <div class="md:w-2/3">
+                    <select
+                        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        name="targetCurrency"
+                        id="targetCurrency"
+                    >
+                        <!-- Insert by js -->
+                    </select>
+                </div>
+            </div>
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3"></div>
+                <div class="md:w-2/3">
+                    <button
+                        class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                        id="convertButton"
+                        type="submit"
+                    >
+                        Convert
+                    </button>
+                </div>
+            </div>
 
-                <label for="currencyInput">Choose a source euro amount:</label>
-                <input
-                    type="number"
-                    name="currencyInput"
-                    min="0"
-                    step="0.01"
-                    id="currencyInput"
-                />
-
-                <br />
-
-                <label for="sourceCurrency">Choose a target currency:</label>
-
-                <select name="targetCurrency" id="targetCurrency">
-                    <!-- Insert by js -->
-                </select>
-
-                <br />
-
-                <span id="outputCurrency"></span>
-                <br />
-                <button id="convertButton" type="submit">Convert</button>
-            </form>
-        </div>
-
-        <script defer type="module" src="/src/scripts/app.ts"></script>
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3"></div>
+                <div class="md:w-2/3">
+                    <span
+                        class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4 pt-5"
+                        id="outputCurrency"
+                    ></span>
+                </div>
+            </div>
+        </form>
     </body>
 </html>
