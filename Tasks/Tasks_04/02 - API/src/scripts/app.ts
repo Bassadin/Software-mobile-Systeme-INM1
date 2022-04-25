@@ -1,10 +1,4 @@
-import Controller from "./Controller";
-import Model from "./Model";
-
-var model = new Model();
-var controller = new Controller(model);
-
-model.addObserver(controller);
+import "@/styles/style.scss";
 
 let targetCurrencyElement: HTMLSelectElement = <HTMLSelectElement>(
     document.getElementById("targetCurrency")
@@ -16,6 +10,7 @@ let currencyInputElement: HTMLInputElement = <HTMLInputElement>(
 
 let outputCurrencyElement = document.getElementById("outputCurrency");
 
+// Handle currency conversion submission
 document
     .getElementById("conversionForm")!
     .addEventListener("submit", (event) => {
@@ -38,6 +33,7 @@ document
             });
     });
 
+// Get available currencies for select item
 fetch(
     `https://api.getgeoapi.com/v2/currency/list?api_key=${
         import.meta.env.VITE_API_KEY
