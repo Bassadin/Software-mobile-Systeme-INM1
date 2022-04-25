@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Währungsrechner</title>
+    </head>
+
+    <body>
+        <div>
+                <h1>Währungsrechner</h1>
+
+            <form id="conversionForm">
+                <br />
+
+                <label for="currencyInput">Choose a source euro amount:</label>
+                <input
+                    type="number"
+                    name="currencyInput"
+                    min="0"
+                    step="0.01"
+                    id="currencyInput"
+                />
+
+                <br />
+
+                <label for="sourceCurrency">Choose a target currency:</label>
+
+                <select name="targetCurrency" id="targetCurrency">
+                    <!-- Insert by js -->
+                </select>
+
+                <br />
+
+                <span id="outputCurrency"></span>
+                <br />
+                <button id="convertButton" type="submit">Convert</button>
+            </form>
+        </div>
+
+        <script defer type="module" src="/src/scripts/app.ts"></script>
+    </body>
+</html>
