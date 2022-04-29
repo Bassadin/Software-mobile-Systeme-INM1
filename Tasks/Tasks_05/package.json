@@ -12,6 +12,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@types/jquery": "^3.5.14",
         "autoprefixer": "^10.4.5",
         "postcss": "^8.4.12",
         "prettier": "^2.6.2",
@@ -23,6 +24,7 @@
         "yarn": "^1.22.18"
     },
     "dependencies": {
-        "axios": "^0.26.1"
+        "axios": "^0.26.1",
+        "jquery": "^3.6.0"
     }
 }
