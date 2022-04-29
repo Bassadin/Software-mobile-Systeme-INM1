@@ -1,14 +1,11 @@
 import "@/styles/style.scss";
+import $ from "jquery";
 
-let targetCurrencyElement: HTMLSelectElement = <HTMLSelectElement>(
-    document.getElementById("targetCurrency")
-);
+let targetCurrencyElement = $("#targetCurrency");
 
-let currencyInputElement: HTMLInputElement = <HTMLInputElement>(
-    document.getElementById("currencyInput")
-);
+let currencyInputElement = $("#currencyInput");
 
-let outputCurrencyElement = document.getElementById("outputCurrency");
+let outputCurrencyElement = $("#outputCurrency");
 
 // Handle currency conversion submission
 document
@@ -17,8 +14,8 @@ document
         event.preventDefault();
         // controller.processCHF();
 
-        let targetCurrency = targetCurrencyElement.value;
-        let amountToConvert = parseFloat(currencyInputElement.value);
+        let targetCurrency: string = <string>targetCurrencyElement.val();
+        let amountToConvert = parseFloat(<string>currencyInputElement.val());
 
         fetch(
             `https://api.getgeoapi.com/v2/currency/convert?api_key=${
@@ -28,7 +25,9 @@ document
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
-                outputCurrencyElement!.innerText = `${data.rates[targetCurrency].rate_for_amount} ${targetCurrency} (Rate for currency ${targetCurrency} is ${data.rates[targetCurrency].rate})`;
+                outputCurrencyElement!.text(
+                    `${data.rates[targetCurrency].rate_for_amount} ${targetCurrency} (Rate for currency ${targetCurrency} is ${data.rates[targetCurrency].rate})`
+                );
             });
     });
 
@@ -48,7 +47,7 @@ function getAvailableCurrenciesAndSetDefaultOne() {
                 newOptionElement.setAttribute("value", eachCurrencyKey);
                 newOptionElement.innerText = `${currencies[eachCurrencyKey]} (${eachCurrencyKey})`;
 
-                targetCurrencyElement?.appendChild(newOptionElement);
+                targetCurrencyElement?.append(newOptionElement);
             });
             // Set preselected item
             document
