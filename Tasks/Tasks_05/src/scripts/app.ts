@@ -1,5 +1,8 @@
 import "@/styles/style.scss";
+import "mdi-icons/css/materialdesignicons.min.css";
+
 import $ from "jquery";
+import { initThemeSwitcherButton } from "./themeSwitcher";
 
 let targetCurrencyElement = $("#targetCurrency");
 
@@ -58,3 +61,4 @@ function getAvailableCurrenciesAndSetDefaultOne() {
 }
 
 getAvailableCurrenciesAndSetDefaultOne();
+initThemeSwitcherButton();
