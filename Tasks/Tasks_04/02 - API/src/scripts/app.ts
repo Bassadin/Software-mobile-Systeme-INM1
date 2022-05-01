@@ -40,11 +40,12 @@ fetch(
     }&format=json`
 ).then((response) => {
     response.json().then((json) => {
-        Object.keys(json.currencies).forEach((eachCurrencyKey: string) => {
+        let currencies = Object.keys(json.currencies).sort();
+        currencies.forEach((eachCurrencyKey: string) => {
             let newOptionElement: HTMLOptionElement =
                 document.createElement("option");
             newOptionElement.setAttribute("value", eachCurrencyKey);
-            newOptionElement.innerText = json.currencies[eachCurrencyKey];
+            newOptionElement.innerText = `${json.currencies[eachCurrencyKey]} (${eachCurrencyKey})`;
 
             targetCurrencyElement?.appendChild(newOptionElement);
         });
