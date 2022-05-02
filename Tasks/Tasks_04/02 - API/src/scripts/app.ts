@@ -27,8 +27,11 @@ document
         )
             .then((response) => response.json())
             .then((data) => {
+                let truncatedTargetCurrencyValue: string = parseFloat(
+                    data.rates[targetCurrency].rate_for_amount
+                ).toFixed(2);
                 outputCurrencyElement!.innerText =
-                    data.rates[targetCurrency].rate_for_amount + " " + targetCurrency;
+                    truncatedTargetCurrencyValue + " " + targetCurrency;
             });
     });
 
