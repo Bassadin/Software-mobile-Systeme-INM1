@@ -27,9 +27,8 @@ document
         )
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 outputCurrencyElement!.innerText =
-                    data.rates[targetCurrency].rate + " " + targetCurrency;
+                    data.rates[targetCurrency].rate_for_amount + " " + targetCurrency;
             });
     });
 
