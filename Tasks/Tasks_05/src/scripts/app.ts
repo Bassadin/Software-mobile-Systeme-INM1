@@ -42,13 +42,13 @@ function getAvailableCurrenciesAndSetDefaultOne() {
         }&format=json`
     ).then((response) => {
         response.json().then((json) => {
-            const currencies: any = json.currencies;
+            let currencies = Object.keys(json.currencies).sort();
 
-            Object.keys(currencies).forEach((eachCurrencyKey: string) => {
+            currencies.forEach((eachCurrencyKey: string) => {
                 let newOptionElement: HTMLOptionElement =
                     document.createElement("option");
                 newOptionElement.setAttribute("value", eachCurrencyKey);
-                newOptionElement.innerText = `${currencies[eachCurrencyKey]} (${eachCurrencyKey})`;
+                newOptionElement.innerText = `${json.currencies[eachCurrencyKey]} (${eachCurrencyKey})`;
 
                 targetCurrencyElement?.append(newOptionElement);
             });
