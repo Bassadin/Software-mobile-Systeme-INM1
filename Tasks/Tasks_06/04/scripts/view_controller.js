@@ -5,74 +5,69 @@
  * courses, books, articles, and the like. Contact us if you are in doubt.
  * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/7apps for more book information.
-***/
-(function($) {
+ ***/
+(function ($) {
+    var namespaces = $.app.namespaces,
+        clock = namespaces.models.Clock,
+        timeZoneManager = namespaces.managers.TimeZoneManager,
+        clockList = $("#clockList"),
+        zoneList = $("#zoneList"),
+        addClockLink = $("a#addClockLink");
 
-  var namespaces = $.app.namespaces,
-      clock = namespaces.models.Clock,
-      timeZoneManager = namespaces.managers.TimeZoneManager,
-      clockList = $("#clockList"),
-      zoneList = $("#zoneList"),
-      addClockLink = $("a#addClockLink");
+    // Verwaltet die Kommunikation zur View (MVC-Konzept)
+    var MainViewController = {
+        initialize: function () {
+            this.openZoneListFunction = _.bind(this.addClockClicked, this);
+            this.closeZoneListFunction = _.bind(this.dismissZoneList, this);
+            addClockLink.click(this.openZoneListFunction);
+            zoneList.hide();
+            this.refreshClockList();
+            clock.start();
 
-  var MainViewController = {
+            timeZoneManager.fetchTimeZones();
+        },
 
+        addClockClicked: function () {
+            if (zoneList.children().length === 0) {
+                var zones = timeZoneManager.allZones();
+                clickHandler = _.bind(this.zoneClicked, this);
+                _.each(zones, function (zone, index) {
+                    var item = $("<li class='zone'/>");
+                    item.data("zoneIndex", index);
+                    item.text(zone.name);
+                    item.click(clickHandler);
+                    zoneList.append(item);
+                });
+            }
+            this.presentZoneList();
+        },
 
-    initialize: function() {
-      this.openZoneListFunction = _.bind(this.addClockClicked, this);
-      this.closeZoneListFunction = _.bind(this.dismissZoneList, this);
-      addClockLink.click(this.openZoneListFunction);
-      zoneList.hide();
-      this.refreshClockList();
-      clock.start();
+        zoneClicked: function (event) {
+            var item = $(event.currentTarget),
+                index = item.data("zoneIndex");
+            timeZoneManager.saveZoneAtIndex(index);
+            this.dismissZoneList();
+            this.refreshClockList();
+        },
 
-      timeZoneManager.fetchTimeZones();
-    },
+        presentZoneList: function () {
+            addClockLink.text("Cancel");
+            addClockLink.click(this.closeZoneListFunction);
+            zoneList.show();
+        },
 
-    addClockClicked : function() {
-      if (zoneList.children().length === 0) {
-        var zones = timeZoneManager.allZones();
-            clickHandler = _.bind(this.zoneClicked, this);
-        _.each(zones, function(zone, index) {
-          var item = $("<li class='zone'/>");
-          item.data("zoneIndex", index);
-          item.text(zone.name);
-          item.click(clickHandler);
-          zoneList.append(item);
-        });
-      }
-      this.presentZoneList();
-    },
+        dismissZoneList: function () {
+            addClockLink.text("Add Clock");
+            addClockLink.click(this.openZoneListFunction);
+            zoneList.hide();
+        },
 
-    zoneClicked : function(event) {
-      var item = $(event.currentTarget),
-          index = item.data("zoneIndex");
-      timeZoneManager.saveZoneAtIndex(index);
-      this.dismissZoneList();
-      this.refreshClockList();
-    },
+        refreshClockList: function () {
+            clockList.empty();
+            timeZoneManager.createClocksIn(clockList);
+            clock.tick();
+        },
+    };
 
-    presentZoneList : function() {
-      addClockLink.text("Cancel");
-      addClockLink.click(this.closeZoneListFunction);
-      zoneList.show();
-    },
-
-    dismissZoneList : function() {
-      addClockLink.text("Add Clock");
-      addClockLink.click(this.openZoneListFunction);
-      zoneList.hide();
-    },
-
-    refreshClockList : function() {
-      clockList.empty();
-      timeZoneManager.createClocksIn(clockList);
-      clock.tick();
-    }
-
-  };
-
-  $.app.register("controllers.MainViewController", MainViewController);
-
+    $.app.register("controllers.MainViewController", MainViewController);
 })(jQuery);
-
