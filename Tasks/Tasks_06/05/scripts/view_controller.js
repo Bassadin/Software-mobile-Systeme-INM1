@@ -5,133 +5,165 @@
  * courses, books, articles, and the like. Contact us if you are in doubt.
  * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/7apps for more book information.
-***/
-(function($) {
+ ***/
+(function ($) {
+    // Initialize the variables needed for the controller namespace
+    var namespaces = $.app.namespaces,
+        clock = namespaces.models.Clock,
+        timeZoneManager = namespaces.managers.TimeZoneManager,
+        clockList = $("#clockList"),
+        zoneList = $("#zoneList"),
+        editLink = $("a#editLink"),
+        addClockLink = $("a#addClockLink");
 
-  var namespaces = $.app.namespaces,
-      clock = namespaces.models.Clock,
-      timeZoneManager = namespaces.managers.TimeZoneManager,
-      clockList = $("#clockList"),
-      zoneList = $("#zoneList"),
-      editLink = $("a#editLink"),
-      addClockLink = $("a#addClockLink");
+    var MainViewController = {
+        // Initialize the main view controller
+        initialize: function () {
+            this.configureListeners();
+            this.refreshClockList();
+            zoneList.hide();
+            clock.start();
 
-  var MainViewController = {
+            timeZoneManager.fetchTimeZones();
+        },
 
+        /**
+         * Add the event listeners for multiple HTMLElements
+         */
+        configureListeners: function () {
+            this.openZoneListFunction = _.bind(this.addClockClicked, this);
+            this.closeZoneListFunction = _.bind(this.dismissZoneList, this);
+            this.editFunction = _.bind(this.editClicked, this);
+            this.doneEditingFunction = _.bind(this.doneClicked, this);
+            this.deleteClockFunction = _.bind(this.deleteClockClicked, this);
+            addClockLink.click(this.openZoneListFunction);
+            editLink.click(this.editFunction);
+        },
 
-    initialize: function() {
-      this.configureListeners();
-      this.refreshClockList();
-      zoneList.hide();
-      clock.start();
+        /**
+         * Handle the click event to add a new clock
+         */
+        addClockClicked: function () {
+            if (zoneList.children().length === 0) {
+                var zones = timeZoneManager.allZones(),
+                    clickHandler = _.bind(this.zoneClicked, this),
+                    template = $("#timeZoneTemplate").text();
+                _.each(zones, function (zone, index) {
+                    var item = $(Mustache.render(template, zone));
+                    item.data("zoneIndex", index);
+                    item.click(clickHandler);
+                    zoneList.append(item);
+                });
+            }
+            this.presentZoneList();
+        },
 
-      timeZoneManager.fetchTimeZones();
-    },
+        /**
+         * Handle the click on a zone to add as a clock
+         */
+        zoneClicked: function (event) {
+            var item = $(event.currentTarget),
+                index = item.data("zoneIndex");
+            timeZoneManager.saveZoneAtIndex(index);
+            this.dismissZoneList();
+            this.refreshClockList();
+        },
 
-    configureListeners : function() {
-      this.openZoneListFunction   = _.bind(this.addClockClicked, this);
-      this.closeZoneListFunction  = _.bind(this.dismissZoneList, this);
-      this.editFunction           = _.bind(this.editClicked, this);
-      this.doneEditingFunction    = _.bind(this.doneClicked, this);
-      this.deleteClockFunction    = _.bind(this.deleteClockClicked, this);
-      addClockLink.click(this.openZoneListFunction);
-      editLink.click(this.editFunction);
-    },
+        /**
+         * Edit button click handler
+         */
+        editClicked: function (event) {
+            this.presentEditMode();
+        },
 
-    addClockClicked : function() {
-      if (zoneList.children().length === 0) {
-        var zones = timeZoneManager.allZones(),
-            clickHandler = _.bind(this.zoneClicked, this),
-            template = $("#timeZoneTemplate").text();
-        _.each(zones, function(zone, index) {
-          var item = $(Mustache.render(template, zone));
-          item.data("zoneIndex", index);
-          item.click(clickHandler);
-          zoneList.append(item);
-        });
-      }
-      this.presentZoneList();
-    },
+        /**
+         * Done button clicked
+         */
+        doneClicked: function (event) {
+            this.dismissEditMode();
+        },
 
-    zoneClicked : function(event) {
-      var item = $(event.currentTarget),
-          index = item.data("zoneIndex");
-      timeZoneManager.saveZoneAtIndex(index);
-      this.dismissZoneList();
-      this.refreshClockList();
-    },
+        /**
+         * Show the time zone list
+         */
+        presentZoneList: function () {
+            this.dismissEditMode();
+            addClockLink.text("Cancel");
+            addClockLink.off("click").click(this.closeZoneListFunction);
+            zoneList.show();
+        },
 
-    editClicked : function(event) {
-      this.presentEditMode();
-    },
+        /**
+         * Dismiss the time zone list
+         */
+        dismissZoneList: function () {
+            addClockLink.text("Add Clock");
+            addClockLink.off("click").click(this.openZoneListFunction);
+            zoneList.hide();
+        },
 
-    doneClicked : function(event) {
-      this.dismissEditMode();
-    },
+        /**
+         * Show the edit mode
+         */
+        presentEditMode: function () {
+            $(".delete-clock-link").show();
+            editLink.text("Done");
+            editLink.off("click").click(this.doneEditingFunction);
+        },
 
-    presentZoneList : function() {
-      this.dismissEditMode();
-      addClockLink.text("Cancel");
-      addClockLink.off("click").
-        click(this.closeZoneListFunction);
-      zoneList.show();
-    },
+        /**
+         * Dismiss the edit mode
+         */
+        dismissEditMode: function () {
+            $(".delete-clock-link").hide();
+            editLink.text("Edit");
+            editLink.off("click").click(this.editFunction);
+        },
 
-    dismissZoneList : function() {
-      addClockLink.text("Add Clock");
-      addClockLink.off("click").
-        click(this.openZoneListFunction);
-      zoneList.hide();
-    },
+        /**
+         * Refresh the list of displayed clocks after deletion
+         */
+        refreshClockList: function () {
+            var zones = timeZoneManager.savedZones(true),
+                template = $("#clockTemplate").text();
+            clockList.empty();
+            _.each(
+                zones,
+                function (zone, index) {
+                    this.createClock(zone, index, template);
+                },
+                this
+            );
+            $(".delete-clock-link").hide();
+            clock.tick();
+        },
 
-    presentEditMode : function() {
-      $(".delete-clock-link").show();
-      editLink.text("Done");
-      editLink.off("click").
-        click(this.doneEditingFunction);
-    },
+        /**
+         * Load the template for a clock to display a new one
+         */
+        createClock: function (zone, index, template) {
+            var item = $(Mustache.render(template, zone)),
+                deleteLink = item.find(".delete-clock-link");
+            if (zone.isCurrent) {
+                deleteLink.remove();
+            } else {
+                deleteLink.data("clockIndex", index - 1);
+                deleteLink.click(this.deleteClockFunction);
+            }
+            clockList.append(item);
+        },
 
-    dismissEditMode : function() {
-      $(".delete-clock-link").hide();
-      editLink.text("Edit");
-      editLink.off("click").
-        click(this.editFunction);
-    },
+        /**
+         * Handle clock deletion
+         */
+        deleteClockClicked: function (event) {
+            var clickedLink = $(event.currentTarget),
+                index = clickedLink.data("clockIndex"),
+                parentDiv = clickedLink.parents(".clock");
+            timeZoneManager.deleteZoneAtIndex(index);
+            parentDiv.remove();
+        },
+    };
 
-    refreshClockList : function() {
-      var zones = timeZoneManager.savedZones(true),
-          template = $("#clockTemplate").text();
-      clockList.empty();
-      _.each(zones, function(zone, index) {
-        this.createClock(zone, index, template);
-      }, this);
-      $(".delete-clock-link").hide();
-      clock.tick();
-    },
-
-    createClock : function(zone, index, template) {
-      var item = $(Mustache.render(template, zone)),
-          deleteLink = item.find(".delete-clock-link");
-      if (zone.isCurrent) {
-        deleteLink.remove();
-      } else {
-        deleteLink.data("clockIndex", index - 1);
-        deleteLink.click(this.deleteClockFunction);
-      }
-      clockList.append(item);
-    },
-
-    deleteClockClicked : function(event) {
-      var clickedLink = $(event.currentTarget),
-          index = clickedLink.data("clockIndex"),
-          parentDiv = clickedLink.parents(".clock");
-      timeZoneManager.deleteZoneAtIndex(index);
-      parentDiv.remove();
-    }
-
-  };
-
-  $.app.register("controllers.MainViewController", MainViewController);
-
+    $.app.register("controllers.MainViewController", MainViewController);
 })(jQuery);
-
