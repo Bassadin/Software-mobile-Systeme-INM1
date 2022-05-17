@@ -13,8 +13,8 @@
       timeZoneManager = namespaces.managers.TimeZoneManager,
       clockList = $("#clockList"),
       zoneList = $("#zoneList"),
-      editLink = $("a#editLink"),
-      addClockLink = $("a#addClockLink");
+      editLink = $("#editLink"),
+      addClockLink = $("#addClockLink");
 
   var MainViewController = {
 

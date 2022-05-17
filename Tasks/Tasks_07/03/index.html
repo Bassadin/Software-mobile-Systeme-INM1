@@ -18,13 +18,24 @@
         <link rel="icon" type="image/png" href="/images/favicon.png" />
         <link rel="apple-touch-icon" href="/images/favicon.png" />
         <meta name="theme-color" content="#9EEFE5" />
+        <script src="https://cdn.tailwindcss.com"></script>
         <title>World Clock</title>
     </head>
-    <body>
-        <a id="addClockLink">Add Clock</a>
-        <a id="editLink">Edit</a>
-        <div id="zoneList"></div>
-        <div id="clockList"></div>
+    <body class="p-5">
+        <button
+            id="addClockLink"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+            Add Clock
+        </button>
+        <button
+            id="editLink"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+            Edit
+        </button>
+        <div id="zoneList" class="container"></div>
+        <div id="clockList" class="container"></div>
 
         <script src="node_modules/underscore/underscore-min.js"></script>
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -34,13 +45,14 @@
         <script src="scripts/clock.js"></script>
         <script src="scripts/view_controller.js"></script>
         <script id="clockTemplate" type="text/template">
-            <div class="clock">
+            <div class="clock bg-blue-100 columns-12 md:columns-3 m-2 p-3 w-full flex flex-col">
               <p class="clock-time">{{time}}</p>
-              <p class="clock-timezone">{{name}} ({{formatted_offset}}) <a class="delete-clock-link">[delete]</a></p>
+              <p class="clock-timezone">{{name}} ({{formatted_offset}})</p>
+              <a class="delete-clock-link p-1 bg-red-500 cursor-pointer rounded w-fit block">[delete]</a>
             </div>
         </script>
         <script id="timeZoneTemplate" type="text/template">
-            <div class="timezone">
+            <div class="timezone bg-blue-100">
               <p class="timezone-name">{{name}}</p>
               <p class="timezone-offset"> (UTC {{formatted_offset}} hours) </p>
             </div>
