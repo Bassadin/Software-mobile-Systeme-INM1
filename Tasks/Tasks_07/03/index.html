@@ -34,8 +34,9 @@
         >
             Edit
         </button>
-        <div id="zoneList" class="container"></div>
-        <div id="clockList" class="container"></div>
+        <div class="py-2"></div>
+        <div id="zoneList" class="grid lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-2 space-x-2 space-y-2"></div>
+        <div id="clockList" class="grid lg:grid-cols-6 md:grid-cols-4 xs:grid-cols-2 space-x-2 space-y-2"></div>
 
         <script src="node_modules/underscore/underscore-min.js"></script>
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -45,16 +46,16 @@
         <script src="scripts/clock.js"></script>
         <script src="scripts/view_controller.js"></script>
         <script id="clockTemplate" type="text/template">
-            <div class="clock bg-blue-100 columns-12 md:columns-3 m-2 p-3 w-full flex flex-col">
-              <p class="clock-time">{{time}}</p>
-              <p class="clock-timezone">{{name}} ({{formatted_offset}})</p>
-              <a class="delete-clock-link p-1 bg-red-500 cursor-pointer rounded w-fit block">[delete]</a>
+            <div class="bg-blue-100  p-3 flex flex-col rounded first:row-span-full">
+              <p class="clock-time font-bold">{{time}}</p>
+              <p class="clock-timezone italic">{{name}} ({{formatted_offset}})</p>
+              <a class="delete-clock-link p-1 bg-red-400 cursor-pointer rounded w-fit block">[delete]</a>
             </div>
         </script>
         <script id="timeZoneTemplate" type="text/template">
-            <div class="timezone bg-blue-100">
-              <p class="timezone-name">{{name}}</p>
-              <p class="timezone-offset"> (UTC {{formatted_offset}} hours) </p>
+            <div class="timezone bg-green-200  p-3 flex flex-col rounded cursor-pointer hover:bg-green-300 transition-colors">
+              <p class="timezone-name font-bold">{{name}}</p>
+              <p class="timezone-offset italic"> (UTC {{formatted_offset}} hours) </p>
             </div>
         </script>
     </body>
