@@ -8,6 +8,7 @@
 ***/
 (function($) {
 
+  // Initialize the variables needed for the controller namespace
   var namespaces = $.app.namespaces,
       clock = namespaces.models.Clock,
       timeZoneManager = namespaces.managers.TimeZoneManager,
@@ -18,7 +19,7 @@
 
   var MainViewController = {
 
-
+// Initialize the main view controller
     initialize: function() {
       timeZoneManager.initialize();
       zoneList.hide();
@@ -27,6 +28,9 @@
       clock.start();
     },
 
+    /**
+         * Add the event listeners for multiple HTMLElements
+         */
     configureListeners : function() {
       this.openZoneListFunction   = _.bind(this.addClockClicked, this);
       this.closeZoneListFunction  = _.bind(this.dismissZoneList, this);
@@ -37,6 +41,9 @@
       editLink.click(this.editFunction);
     },
 
+     /**
+         * Handle the click event to add a new clock
+         */
     addClockClicked : function() {
       if (zoneList.children().length === 0) {
         var zones = timeZoneManager.allZones(),
@@ -52,6 +59,9 @@
       this.presentZoneList();
     },
 
+    /**
+         * Handle the click on a zone to add as a clock
+         */
     zoneClicked : function(event) {
       var item = $(event.currentTarget),
           index = item.data("zoneIndex");
@@ -60,14 +70,23 @@
       this.refreshClockList();
     },
 
+     /**
+         * Edit button click handler
+         */
     editClicked : function(event) {
       this.presentEditMode();
     },
 
+    /**
+         * Done button clicked
+         */
     doneClicked : function(event) {
       this.dismissEditMode();
     },
 
+     /**
+         * Show the time zone list
+         */
     presentZoneList : function() {
       this.dismissEditMode();
       addClockLink.text("Cancel");
@@ -76,6 +95,9 @@
       zoneList.show();
     },
 
+     /**
+         * Dismiss the time zone list
+         */
     dismissZoneList : function() {
       addClockLink.text("Add Clock");
       addClockLink.off("click").
@@ -83,6 +105,9 @@
       zoneList.hide();
     },
 
+    /**
+         * Show the edit mode
+         */
     presentEditMode : function() {
       $(".delete-clock-link").show();
       editLink.text("Done");
@@ -90,6 +115,9 @@
         click(this.doneEditingFunction);
     },
 
+     /**
+         * Dismiss the edit mode
+         */
     dismissEditMode : function() {
       $(".delete-clock-link").hide();
       editLink.text("Edit");
@@ -97,6 +125,9 @@
         click(this.editFunction);
     },
 
+     /**
+         * Refresh the list of displayed clocks after deletion
+         */
     refreshClockList : function() {
       var zones = timeZoneManager.savedZones(true),
           template = $("#clockTemplate").text();
@@ -108,6 +139,9 @@
       clock.tick();
     },
 
+     /**
+         * Load the template for a clock to display a new one
+         */
     createClock : function(zone, index, template) {
       var item = $(Mustache.render(template, zone)),
           deleteLink = item.find(".delete-clock-link");
@@ -120,6 +154,9 @@
       clockList.append(item);
     },
 
+      /**
+         * Handle clock deletion
+         */
     deleteClockClicked : function(event) {
       var clickedLink = $(event.currentTarget),
           index = clickedLink.data("clockIndex"),

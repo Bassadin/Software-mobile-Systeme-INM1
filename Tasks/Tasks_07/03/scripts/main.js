@@ -8,13 +8,20 @@
  ***/
 (function ($) {
     window.app = {};
+    // Makes the window.app object available through jQuery
     $.app = window.app;
+     // Initializes the namespaces object
     $.app.namespaces = {
         models: {},
     };
 
     var namespaces = $.app.namespaces;
 
+     /**
+     * Registers an object in a namespace
+     * @param {string} namespace
+     * @param {any} object
+     */
     $.app.register = function (namespace, object) {
         var leaf = _.reduce(
             namespace.split("."),

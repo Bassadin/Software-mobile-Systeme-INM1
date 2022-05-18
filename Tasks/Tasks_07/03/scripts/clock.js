@@ -13,15 +13,24 @@
 
   var Clock = {
 
+    // Initializes clock functionality
     start: function() {
       this.tick();
       var tickFunction = _.bind(this.tick, this);
       setInterval(tickFunction, 1000);
     },
 
+    /**
+         * Updates the time of each clock
+         */
     tick : function() {
       var date = new Date(),
           zones = tzManager.savedZones(true);
+          /**
+             * Updates a clock with the given index, represented by @element
+             * @param {number} index
+             * @param {HTMLElement} element
+             */
       var updateClockAtIndex = function(index, element) {
         var zone = zones[index],
             formattedTime = this.convertAndFormatDate(zone.offset, date);
@@ -31,6 +40,13 @@
       $(".clock-time").each(updateClockAtIndex);
     },
 
+     /**
+         * Converts and formats a given @date and offets it by @offset
+         * Returns a format, e.g. "12:20:32"
+         * @param {number} offset
+         * @param {Date} date
+         * @returns {string}
+         */
     convertAndFormatDate : function(offset, date) {
       var convertedSeconds = date.getUTCMinutes() * 60 +
             date.getUTCHours() * 3600 + offset,
@@ -47,6 +63,14 @@
       return formattedTime;
     },
 
+     /**
+         * Pads a @number with zeroes
+         * For example:
+         * 5 -> "05"
+         * 15 -> "15"
+         * @param {number} number the number to pad
+         * @returns {string}
+         */
     zeroPad : function(number) {
       var s = number.toString();
       var formattedNumber = (s.length > 1) ? s : "0" + s;
@@ -54,6 +78,7 @@
     }
   };
 
+   // Registers this in the models.Clock namespace
   $.app.register("models.Clock", Clock);
 
 })(jQuery);

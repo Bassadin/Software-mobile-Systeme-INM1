@@ -6,53 +6,61 @@
  * We make no guarantees that this code is fit for any purpose.
  * Visit http://www.pragmaticprogrammer.com/titles/7apps for more book information.
 ***/
-(function($) {
+(function ($) {
 
   var TimeZoneManager = {
 
-    savedTimeZones : [],
+    // The currently selected time zones
+    savedTimeZones: [],
 
-    initialize : function() {
+
+    initialize: function () {
       this.loadSavedTimeZones();
       if (!navigator.onLine) {
         this.loadLocalTimeZones();
       } else {
-        var completion = _.bind(function(zones) {
+        var completion = _.bind(function (zones) {
           this.storeTimeZonesLocally(zones);
         }, this);
         this.fetchTimeZones(completion);
       }
     },
 
-    fetchTimeZones : function(completion) {
-      var successFunction = _.bind(function(data) {
+    /**
+        * Gets time zones from the server and loads them into a variable
+        * Returns a format, e.g. "12:20:32"
+        * @param completion
+        */
+    fetchTimeZones: function (completion) {
+      var successFunction = _.bind(function (data) {
         this.zonesLoaded(data);
         if (completion) completion(data);
       }, this);
-      var errorFunction = _.bind(function() {
+      var errorFunction = _.bind(function () {
         this.loadLocalTimeZones();
       }, this);
 
+      // Gets the time zones from the server
       $.ajax({
-        url     : "http://localhost:3000/clock/time_zones",
-        headers : { Accept: "application/json" },
-        success : successFunction,
-        error   : errorFunction
+        url: "http://localhost:3000/clock/time_zones",
+        headers: { Accept: "application/json" },
+        success: successFunction,
+        error: errorFunction
       });
     },
 
-    loadSavedTimeZones : function(){
+    loadSavedTimeZones: function () {
       var localSavedZones = localStorage.savedTimeZones;
       if (localSavedZones) {
         this.savedTimeZones = JSON.parse(localSavedZones);
       }
     },
 
-    storeSavedTimeZonesLocally : function() {
+    storeSavedTimeZonesLocally: function () {
       localStorage.savedTimeZones = JSON.stringify(this.savedTimeZones);
     },
 
-    loadLocalTimeZones : function() {
+    loadLocalTimeZones: function () {
       var localZones = localStorage.allTimeZones;
       if (localZones) {
         this.zonesLoaded(JSON.parse(localZones));
@@ -61,30 +69,49 @@
       }
     },
 
-    storeTimeZonesLocally : function(zones) {
+    storeTimeZonesLocally: function (zones) {
       localStorage.allTimeZones = JSON.stringify(zones);
     },
 
-    zonesLoaded : function(zones) {
+    zonesLoaded: function (zones) {
       this.timeZones = zones;
     },
 
-    allZones : function() {
+    /**
+         * Gets all time zones
+         * @returns {Array}
+         */
+    allZones: function () {
       return this.timeZones;
     },
 
-    saveZoneAtIndex : function(index) {
+
+    /**
+     * Adds a new zone at a given @index
+     * @param {number} index
+     */
+    saveZoneAtIndex: function (index) {
       var zone = this.timeZones[index];
       this.savedTimeZones.push(zone);
       this.storeSavedTimeZonesLocally();
     },
 
-    deleteZoneAtIndex : function(index) {
+
+    /**
+     * Adds a new zone at a given @index
+     * @param {number} index
+     */
+    deleteZoneAtIndex: function (index) {
       this.savedTimeZones.splice(index, 1);
       this.storeSavedTimeZonesLocally();
     },
 
-    savedZones : function(includeCurrent) {
+    /**
+        * Get the saved time zones
+        * @param {boolean} includeCurrent - whether to include the current time zone
+        * @returns {Array}
+        */
+    savedZones: function (includeCurrent) {
       var zones = [].concat(this.savedTimeZones);
       if (includeCurrent) {
         var refDate = new Date();
@@ -94,13 +121,18 @@
           zone_name: "Current",
           offset: -offsetMinutes * 60,
           formatted_offset: this.formatOffsetMinutes(-offsetMinutes),
-          isCurrent : true
+          isCurrent: true
         });
       }
       return zones;
     },
 
-    formatOffsetMinutes : function(offsetMinutes) {
+    /**
+         * Formats the minutes that each timezone is offset by
+         * @param {number} offsetMinutes - whether to include the current time zone
+         * @returns {string}
+         */
+    formatOffsetMinutes: function (offsetMinutes) {
       var offsetHours = offsetMinutes / 60;
       offsetHours = Math.abs(offsetHours).toString() + ":00";
       if (offsetMinutes < 600) offsetHours = "0" + offsetHours;
@@ -110,6 +142,7 @@
 
   };
 
+  // Register the TimeZoneManager under managers
   $.app.register("managers.TimeZoneManager", TimeZoneManager);
 
 })(jQuery);
