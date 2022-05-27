@@ -1,4 +1,4 @@
-package de.bassadin.somos01_bassadin
+package de.bassadin.somos03_bassadin
 
 import org.junit.Test
 

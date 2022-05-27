@@ -1,4 +1,4 @@
-package de.bassadin.somos01_bassadin
+package de.bassadin.somos03_bassadin
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
