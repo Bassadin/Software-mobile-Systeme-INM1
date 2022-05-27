@@ -27,8 +27,16 @@ class MainActivity : AppCompatActivity() {
             val tipPercentageInputValue = grossAmountInput.text.toString().toFloat();
             val personsAmountInputValue = grossAmountInput.text.toString().toInt();
 
-            
+            val entireGrossAmount =
+                grossAmountInputValue + grossAmountInputValue * tipPercentageInputValue / 100;
+            val tipAmount = entireGrossAmount * tipPercentageInputValue / 100;
 
+            var outputValue = "";
+
+            outputValue += "Gesamtbetrag: ${entireGrossAmount}\n";
+            outputValue += "Betrag je Person: ${entireGrossAmount / personsAmountInputValue}\n";
+            outputValue += "Trinkgeld: ${tipAmount}\n";
+            outputValue += "Trinkgeld je Person: ${tipAmount / personsAmountInputValue}\n";
 
             resultTextView.text = outputValue.toString();
 
