@@ -1,11 +1,107 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="de" class="h-screen w-screen">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Währungsrechner</title>
+        <link rel="icon" type="image/x-icon" href="./assets/favicon.3839ee0e.ico" />
+        
+      <script type="module" crossorigin src="./assets/index.78b245c1.js"></script>
+      <link rel="stylesheet" href="./assets/index.bfff1db2.css">
+    </head>
 
-<h1>My First Heading</h1>
+    <body class="flex h-screen flex-col justify-between">
+        <header
+            class="flex justify-between bg-header-footer p-5 font-heading text-header-footer"
+        >
+            <span class="font-heading text-xl font-bold">
+                Currency Converter 💱
+            </span>
+            <button
+                class="focus:shadow-outline my-auto h-fit rounded bg-button py-1 px-3 font-bold text-black shadow hover:bg-button-hover focus:outline-none"
+                id="theme-button"
+                type="submit"
+            >
+                <i class="mdi mdi-palette text-xl text-button"></i>
+            </button>
+        </header>
+        <main
+            class="max-h-90 mb-auto flex flex-col justify-center py-8 px-4 font-body md:mt-auto"
+        >
+            <form
+                class="mx-auto w-full max-w-sm align-middle"
+                id="conversionForm"
+            >
+                <div class="mb-6 md:flex md:items-center">
+                    <div class="md:w-1/3">
+                        <label
+                            class="mb-1 block pr-4 text-base font-bold text-primary md:mb-0 md:text-right"
+                            for="currencyInput"
+                        >
+                            € Amount
+                        </label>
+                    </div>
+                    <div class="md:w-2/3">
+                        <input
+                            class="w-full appearance-none rounded border-2 border-form-input py-2 px-4 text-base leading-tight text-primary focus:bg-white focus:outline-none"
+                            type="number"
+                            name="currencyInput"
+                            min="0"
+                            step="0.01"
+                            id="currencyInput"
+                            value="10"
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="mb-6 md:flex md:items-center">
+                    <div class="md:w-1/3">
+                        <label
+                            class="mb-1 block pr-4 text-base font-bold text-primary md:mb-0 md:text-right"
+                            for="targetCurrency"
+                        >
+                            Target currency
+                        </label>
+                    </div>
+                    <div class="md:w-2/3">
+                        <select
+                            class="w-full appearance-none rounded border-2 border-form-input py-2 px-4 text-base leading-tight text-primary focus:bg-white focus:outline-none"
+                            name="targetCurrency"
+                            id="targetCurrency"
+                        >
+                            <!-- Insert by js -->
+                        </select>
+                    </div>
+                </div>
+                <div class="md:flex md:items-center">
+                    <div class="md:w-1/3"></div>
+                    <div class="md:w-2/3">
+                        <button
+                            class="focus:shadow-outline rounded bg-button py-2 px-4 text-base font-bold text-button shadow hover:bg-button-hover focus:outline-none"
+                            id="convertButton"
+                            type="submit"
+                        >
+                            Convert
+                        </button>
+                    </div>
+                </div>
 
-<p>My first paragraph.</p>
-
-</body>
+                <div class="md:flex md:items-center">
+                    <div class="md:w-1/3"></div>
+                    <div class="md:w-2/3">
+                        <span
+                            class="mb-1 block pr-4 pt-5 text-base font-bold text-primary md:mb-0"
+                            id="outputCurrency"
+                        ></span>
+                    </div>
+                </div>
+            </form>
+        </main>
+        <footer class="bg-header-footer p-6 text-header-footer">
+            <span class="font-footer font-bold">
+                Currency Converter 💱 @HFU 2022
+            </span>
+        </footer>
+    </body>
 </html>
-
