@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "de.bassadin.somos01_bassadin"
+        applicationId "de.bassadin.somos03_bassadin"
         minSdk 23
         targetSdk 32
         versionCode 1
