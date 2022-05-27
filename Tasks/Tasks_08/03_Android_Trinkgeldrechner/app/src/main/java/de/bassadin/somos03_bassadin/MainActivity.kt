@@ -24,19 +24,20 @@ class MainActivity : AppCompatActivity() {
         convertButton.setOnClickListener {
 
             val grossAmountInputValue = grossAmountInput.text.toString().toFloat();
-            val tipPercentageInputValue = grossAmountInput.text.toString().toFloat();
-            val personsAmountInputValue = grossAmountInput.text.toString().toInt();
+            val tipPercentageInputValue = tipPercentageInput.text.toString().toFloat();
+            val personsAmountInputValue = personsAmountInput.text.toString().toInt();
 
+            val decimalTipRate = tipPercentageInputValue / 100
             val entireGrossAmount =
-                grossAmountInputValue + grossAmountInputValue * tipPercentageInputValue / 100;
-            val tipAmount = entireGrossAmount * tipPercentageInputValue / 100;
+                grossAmountInputValue + (grossAmountInputValue * decimalTipRate);
+            val tipAmount = grossAmountInputValue * decimalTipRate
 
             var outputValue = "";
 
-            outputValue += "Gesamtbetrag: ${entireGrossAmount}\n";
-            outputValue += "Betrag je Person: ${entireGrossAmount / personsAmountInputValue}\n";
-            outputValue += "Trinkgeld: ${tipAmount}\n";
-            outputValue += "Trinkgeld je Person: ${tipAmount / personsAmountInputValue}\n";
+            outputValue += "Gesamtbetrag: ${entireGrossAmount}€ \n";
+            outputValue += "Betrag je Person: ${entireGrossAmount / personsAmountInputValue}€ \n";
+            outputValue += "Trinkgeld: ${tipAmount}€ \n";
+            outputValue += "Trinkgeld je Person: ${tipAmount / personsAmountInputValue}€ \n";
 
             resultTextView.text = outputValue.toString();
 
